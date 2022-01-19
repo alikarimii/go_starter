@@ -1,0 +1,25 @@
+syntax = "proto3";
+option go_package="github.com/alikarimii/go_starter/src/customeraccounts/infrastructure/adapter/grpc/pb";
+
+package pb;
+// import "google/protobuf/empty.proto";
+import "google/api/annotations.proto";
+
+service Customer {
+   rpc SignIn (SignInReq) returns (SignInRes) {
+       option (google.api.http) = {
+            post: "/v1/customer"
+            body: "*"
+        };
+   }
+}
+
+message SignInReq {
+    string username=1;
+    string password=2;
+}
+message SignInRes {
+    bool ok=1;
+    string message=2;
+    uint32 code=3;
+}
